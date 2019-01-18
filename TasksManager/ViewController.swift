@@ -11,21 +11,24 @@ import RealmSwift
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
-    var realm: Realm!
-    
-    var objectsArray: Results<Item> {
+  //  var realm: Realm!
+
+    var objectsArray: Results<Task> {
         get {
-            return realm.objects(Item.self)
+            return dbFunction.getArrayItem()
         }
     }
+    var dbFunction = DbFunction()
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        realm = try! Realm()
+        
+        let realm = try! Realm()
+        dbFunction.realm = realm
         
         setup()
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyCell.self, forCellReuseIdentifier: MyCell.reuseIdentifier)
@@ -50,13 +53,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
         let addAction = UIAlertAction(title: "Add", style: .default) { (UIAlertAction) in
             let myTextField = (alertVC.textFields?.first)! as UITextField
-            
-            let item = Item()
-            item.name = myTextField.text!
-            
-            try! self.realm.write {
-                self.realm.add(item)
-                self.tableView.insertRows(at: [IndexPath(row: self.objectsArray.count - 1, section: 0)], with: .automatic)
+
+            do {
+                let item = self.dbFunction.makeNewTask(myTextField.text!)
+                let result = try self.dbFunction.write(item)
+                if result {
+                    self.tableView.insertRows(at: [IndexPath(row: self.objectsArray.count - 1, section: 0)], with: .automatic)
+                }
+            }catch {
+                print(error.localizedDescription)
             }
         }
         alertVC.addAction(cancelAction)
@@ -84,11 +89,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if editingStyle == .delete {
             let item = objectsArray[indexPath.row]
             
-            try! self.realm.write {
-                self.realm.delete(item)
+            do{
+                let result = try self.dbFunction.delete(item)
+                if result {
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+            }catch {
+                print(error.localizedDescription)
             }
-            
-            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
 

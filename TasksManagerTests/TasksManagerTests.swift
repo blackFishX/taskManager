@@ -11,10 +11,13 @@ import RealmSwift
 @testable import TasksManager
 class TasksManagerTests: XCTestCase {
 
+    var dbFunction: DbFunction = DbFunction()
+    
     override func setUp() {
         Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
 
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let realm = try! Realm()
+        dbFunction.realm = realm
     }
 
     override func tearDown() {
@@ -33,4 +36,40 @@ class TasksManagerTests: XCTestCase {
         }
     }
 
+    
+    func testSaveAndGetTask() {
+        do {
+            let task = self.dbFunction.makeNewTask("TEST")
+            
+            try dbFunction.write(task)
+            let arrayTask = dbFunction.getArrayItem()
+            XCTAssertEqual(arrayTask.count, 1)
+            
+            let task1 = arrayTask.first
+            XCTAssertEqual(task1?.name, "TEST")
+            
+        } catch RuntimeError.NoRealmSet {
+            XCTAssert(false, "No realm database was set")
+        } catch {
+            XCTAssert(false, "Unexpected error \(error)")
+        }
+    }
+    
+    func testDeleteTask() {
+        do {
+            let task = self.dbFunction.makeNewTask("TEST")
+            
+            try dbFunction.write(task)
+            try dbFunction.delete(task)
+            
+            let arrayTask = dbFunction.getArrayItem()
+            XCTAssertEqual(arrayTask.count, 0)
+
+            
+        } catch RuntimeError.NoRealmSet {
+            XCTAssert(false, "No realm database was set")
+        } catch {
+            XCTAssert(false, "Unexpected error \(error)")
+        }
+    }
 }

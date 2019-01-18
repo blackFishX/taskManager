@@ -16,6 +16,7 @@
 		C223494021F09EBA002F9438 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223493F21F09EBA002F9438 /* Item.swift */; };
 		C223494221F09EEE002F9438 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223494121F09EEE002F9438 /* MyCell.swift */; };
 		C223494A21F0B1CE002F9438 /* TasksManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223494921F0B1CE002F9438 /* TasksManagerTests.swift */; };
+		C2382F0E21F2064200A150E1 /* DbFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2382F0D21F2064200A150E1 /* DbFunction.swift */; };
 		F091CE76210FF783402CA0AC /* Pods_TasksManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F481DC016C1824543A10A00 /* Pods_TasksManagerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		C223494721F0B1CE002F9438 /* TasksManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TasksManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C223494921F0B1CE002F9438 /* TasksManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksManagerTests.swift; sourceTree = "<group>"; };
 		C223494B21F0B1CE002F9438 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2382F0D21F2064200A150E1 /* DbFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbFunction.swift; sourceTree = "<group>"; };
 		F6C3885656A2EE40AF489C06 /* Pods-TasksManagerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TasksManagerTests.release.xcconfig"; path = "Target Support Files/Pods-TasksManagerTests/Pods-TasksManagerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 				C223493921F099DD002F9438 /* Info.plist */,
 				C223493F21F09EBA002F9438 /* Item.swift */,
 				C223494121F09EEE002F9438 /* MyCell.swift */,
+				C2382F0D21F2064200A150E1 /* DbFunction.swift */,
 			);
 			path = TasksManager;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			files = (
 				C223493021F099DC002F9438 /* ViewController.swift in Sources */,
 				C223494221F09EEE002F9438 /* MyCell.swift in Sources */,
+				C2382F0E21F2064200A150E1 /* DbFunction.swift in Sources */,
 				C223494021F09EBA002F9438 /* Item.swift in Sources */,
 				C223492E21F099DC002F9438 /* AppDelegate.swift in Sources */,
 			);
